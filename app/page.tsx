@@ -1019,7 +1019,7 @@ export default function Home() {
                 <h2>Cuisining</h2>
                 <div className={styles.tasksList}>
                   <h3>Project Details:</h3>
-                  <p>A web based 3d Cooking simulator with modular system inspired by TESDA's Cookery NC-II</p>
+                  <p>A web based 3d Cooking simulator with modular system inspired by TESDA&apos;s Cookery NC-II</p>
                   <h3>My Role:</h3>
                   <ul>
                     <li>UI Designer</li>
