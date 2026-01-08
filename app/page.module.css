@@ -1,0 +1,1355 @@
+.main {
+  min-height: 100vh;
+  padding: 2rem;
+  font-family: 'XPaider', monospace;
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+.header {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.headerCard,
+.statsCard,
+.socialCard {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: auto;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.headerCard {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.headerContent {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.5rem;
+  width: 100%;
+}
+
+.headerImage {
+  position: absolute;
+  right: -5px;
+  top: -43px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-shrink: 0;
+  z-index: 10;
+}
+
+.headerImage img {
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+  width: 178px;
+  height: auto;
+}
+
+.headerCard h1 {
+  font-size: 1.8rem;
+  font-weight: bold;
+  letter-spacing: 0.05em;
+  margin: 0;
+  white-space: nowrap;
+}
+
+.subtitle {
+  font-size: 0.9rem;
+  color: #666;
+  font-weight: normal;
+}
+
+.statsCard {
+  text-align: center;
+}
+
+.statsCard h2 {
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
+.stats {
+  font-size: 3rem;
+  font-weight: bold;
+  line-height: 1;
+  color: var(--primary);
+}
+
+.statsLabel {
+  font-size: 0.85rem;
+  color: #666;
+}
+
+.socialCard {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.socialCard a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  font-size: 1.5rem;
+  border: 2px solid var(--primary);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.socialCard a:hover {
+  background-color: var(--accent);
+  color: var(--secondary);
+}
+
+.content {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 2rem;
+}
+
+.aboutCard {
+  min-height: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.aboutCard h2 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  border-bottom: 3px solid var(--primary);
+  padding-bottom: 0.5rem;
+}
+
+.section h3 {
+  font-size: 1rem;
+  font-weight: bold;
+  margin-bottom: 0.3rem;
+}
+
+.section ul {
+  list-style: none;
+  margin-left: 0;
+}
+
+.section li {
+  padding-left: 1rem;
+  position: relative;
+  color: #666;
+  font-size: 0.9rem;
+  margin-bottom: 0.2rem;
+}
+
+.section li:before {
+  content: "→";
+  position: absolute;
+  left: 0;
+  color: var(--primary);
+}
+
+.projectsSection {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.projectsSection h2 {
+  font-size: 1.3rem;
+  font-weight: bold;
+  border-bottom: 3px solid var(--primary);
+  padding-bottom: 0.5rem;
+}
+
+.projectsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.projectCard {
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
+  border-radius: 8px;
+  gap: 0.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.projectCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.projectCard h3 {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: var(--primary);
+}
+
+.projectDesc {
+  font-size: 0.85rem;
+  font-weight: bold;
+  color: #666;
+}
+
+.projectCard p {
+  font-size: 0.85rem;
+  line-height: 1.4;
+  color: #333;
+}
+
+.projectList {
+  list-style: none;
+  margin-left: 0.5rem;
+  margin-top: 0.3rem;
+}
+
+.projectList li {
+  padding-left: 1rem;
+  position: relative;
+  font-size: 0.8rem;
+  color: #666;
+}
+
+.projectList li:before {
+  content: "▪";
+  position: absolute;
+  left: 0;
+  color: var(--primary);
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .header {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .content {
+    grid-template-columns: 1fr;
+  }
+
+  .projectsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .main {
+    padding: 1rem;
+  }
+
+  .header {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .projectsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .headerCard h1 {
+    font-size: 1.5rem;
+  }
+
+  .stats {
+    font-size: 2rem;
+  }
+}
+
+/* Modal Styles */
+.loadingOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.loadingContainer {
+  text-align: center;
+}
+
+.loadingBar {
+  width: 200px;
+  height: 20px;
+  background-color: #ffffff;
+  border: 4px solid var(--primary);
+  margin: 0 auto 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.loadingBar::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background-color: var(--accent);
+  animation: loading 3s infinite;
+}
+
+@keyframes loading {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+.loadingContainer p {
+  font-family: 'XPaider', monospace;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #ffffff;
+  letter-spacing: 0.1em;
+}
+
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+/* Task modal overlay appears above project modals */
+.taskModalOverlay {
+  z-index: 1001 !important;
+}
+
+.modal {
+  background-color: #ffffff;
+  padding: 2rem;
+  max-width: 900px;
+  width: 90%;
+  position: relative;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.closeButton {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--primary);
+}
+
+.closeButton:hover {
+  color: var(--accent);
+}
+
+.modalContent {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: center;
+}
+
+.modalInfo h2 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+  color: var(--primary);
+}
+
+.infoItem {
+  margin-bottom: 1rem;
+}
+
+.infoItem label {
+  font-weight: bold;
+  color: var(--primary);
+  display: block;
+  font-size: 0.9rem;
+}
+
+.infoItem p {
+  color: #666;
+  font-size: 0.9rem;
+  margin-top: 0.25rem;
+}
+
+.modalImage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modalImage img {
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+}
+
+/* Responsive Modal */
+@media (max-width: 768px) {
+  .modalContent {
+    grid-template-columns: 1fr;
+  }
+
+  .modal {
+    padding: 1.5rem;
+  }
+}
+
+/* Project Modal Styles */
+.projectModalContent {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: center;
+}
+
+.projectInfo {
+  display: flex;
+  flex-direction: column;
+}
+
+.projectModalContent h2 {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: var(--primary);
+  margin-bottom: 1.5rem;
+  border-bottom: 3px solid var(--accent);
+  padding-bottom: 0.5rem;
+}
+
+.projectImage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.projectImage img {
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+}
+
+.tasksList h3 {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: var(--primary);
+  margin-bottom: 1rem;
+}
+
+.tasksList ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.tasksList li {
+  padding: 0.75rem 0.75rem 0.75rem 1.5rem;
+  position: relative;
+  color: #333;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.tasksList li:hover {
+  background-color: var(--primary);
+  color: #ffffff;
+}
+
+.tasksList li:before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+  font-weight: bold;
+}
+
+.tasksList li:hover:before {
+  color: #ffffff;
+}
+
+.taskModalContent {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.taskModalContent h2 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--primary);
+  border-bottom: 3px solid var(--accent);
+  padding-bottom: 0.5rem;
+  margin: 0;
+}
+
+.taskModalContent p {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #333;
+  margin: 0;
+}
+
+/* Instagram Modal Styles */
+.instagramModal {
+  background-color: #ffffff;
+  padding: 0;
+  max-width: 450px;
+  width: 90%;
+  position: relative;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  overflow: hidden;
+  margin: 2rem auto;
+  max-height: 85vh;
+  overflow-y: auto;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.instagramModal::-webkit-scrollbar {
+  display: none;
+}
+
+.instagramProfileContent {
+  display: flex;
+  flex-direction: column;
+}
+
+.instagramHeader {
+  padding: 2rem 1.5rem 1rem;
+  border-bottom: 1px solid #e0e0e0;
+  display: flex;
+  justify-content: center;
+}
+
+.instagramProfilePic {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f0f0f0;
+}
+
+.instagramProfilePic img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  image-rendering: pixelated;
+}
+
+.instagramInfo {
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.instagramInfo h2 {
+  font-size: 1.3rem;
+  font-weight: bold;
+  margin: 0 0 0.5rem 0;
+  color: #000;
+}
+
+.instagramBio {
+  font-size: 0.9rem;
+  color: #666;
+  margin: 0 0 1.5rem 0;
+  line-height: 1.4;
+}
+
+.instagramStats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  padding: 1rem 0;
+  border-top: 1px solid #e0e0e0;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.statItem {
+  text-align: center;
+}
+
+.statNumber {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--primary);
+  margin: 0;
+}
+
+.statLabel {
+  font-size: 0.85rem;
+  color: #666;
+  margin: 0.25rem 0 0 0;
+}
+
+.followButton {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: var(--primary);
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.followButton:hover {
+  background-color: var(--accent);
+  transform: translateY(-2px);
+}
+
+.instagramGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background-color: #e0e0e0;
+}
+
+.gridItem {
+  aspect-ratio: 1;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  cursor: pointer;
+  transition: all 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+
+.gridImage {
+  object-fit: cover;
+  image-rendering: pixelated;
+}
+
+.gridItem:hover {
+  opacity: 0.8;
+}
+
+/* All Projects Modal Styles */
+.allProjectsModal {
+  background-color: #ffffff;
+  padding: 2rem;
+  max-width: 900px;
+  width: 90%;
+  position: relative;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  overflow: hidden;
+  margin: 2rem auto;
+  max-height: 85vh;
+  overflow-y: auto;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.allProjectsModal::-webkit-scrollbar {
+  display: none;
+}
+
+.allProjectsContent {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.allProjectsContent h2 {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: var(--primary);
+  margin: 0;
+  border-bottom: 3px solid var(--accent);
+  padding-bottom: 0.5rem;
+}
+
+.projectsCardGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1.5rem;
+}
+
+.projectItemCard {
+  background-color: #ffffff;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  min-height: 150px;
+  justify-content: flex-start;
+}
+
+.projectItemCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  background-color: var(--primary);
+}
+
+.projectItemCard:hover h3,
+.projectItemCard:hover p {
+  color: #ffffff;
+}
+
+.projectItemCard h3 {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: var(--primary);
+  margin: 0;
+  transition: color 0.2s;
+}
+
+.projectItemCard p {
+  font-size: 0.85rem;
+  color: #666;
+  margin: 0;
+  transition: color 0.2s;
+}
+/* Website Preview Styles */
+.websitePreview {
+  width: 100%;
+  margin-top: 1.5rem;
+  padding: 1rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: 4px solid var(--primary);
+  border-radius: 4px;
+  box-shadow: 
+    inset 0 0 0 2px #ffffff,
+    0 8px 16px rgba(0, 0, 0, 0.2);
+  position: relative;
+}
+
+.websitePreview::before {
+  content: '';
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  right: -4px;
+  bottom: -4px;
+  background: 
+    repeating-linear-gradient(
+      90deg,
+      var(--primary) 0,
+      var(--primary) 2px,
+      transparent 2px,
+      transparent 4px
+    ),
+    repeating-linear-gradient(
+      0deg,
+      var(--primary) 0,
+      var(--primary) 2px,
+      transparent 2px,
+      transparent 4px
+    );
+  pointer-events: none;
+  z-index: -1;
+}
+
+.websitePreview iframe {
+  width: 100%;
+  height: 400px;
+  border: 2px solid var(--primary);
+  border-radius: 2px;
+  background-color: #ffffff;
+  display: block;
+}
+
+.featuresList {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0;
+}
+
+.featuresList li {
+  padding: 0.75rem 0.75rem 0.75rem 1.75rem;
+  position: relative;
+  color: #333;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin-bottom: 0.5rem;
+  background-color: rgba(102, 126, 234, 0.05);
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.featuresList li:hover {
+  background-color: rgba(102, 126, 234, 0.15);
+  transform: translateX(4px);
+}
+
+.featuresList li:before {
+  content: "★";
+  position: absolute;
+  left: 0.5rem;
+  color: var(--accent);
+  font-weight: bold;
+}
+
+/* TaskZ Modal Content - Landscape Layout */
+.taskZModalContent {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 2rem;
+  align-items: flex-start;
+}
+
+.taskZInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.taskZInfo h2 {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: var(--primary);
+  margin: 0;
+  border-bottom: 3px solid var(--accent);
+  padding-bottom: 0.5rem;
+}
+
+.taskZInfo p {
+  margin: 0;
+}
+
+.taskZLink {
+  color: var(--primary);
+  text-decoration: none;
+  transition: all 0.3s ease;
+  font-weight: bold;
+}
+
+.taskZLink:hover {
+  color: var(--accent);
+  text-decoration: underline;
+  transform: scale(1.05);
+}
+
+.taskZPreview {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+@media (max-width: 1200px) {
+  .taskZModalContent {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Email Modal Styles */
+.emailModal {
+  background-color: #ffffff;
+  padding: 0;
+  max-width: 700px;
+  width: 90%;
+  position: relative;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  max-height: 85vh;
+}
+
+.emailHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 2rem;
+  border-bottom: 1px solid #e0e0e0;
+  background-color: #f5f5f5;
+}
+
+.emailHeader h2 {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: var(--primary);
+  margin: 0;
+}
+
+.emailSubtitle {
+  font-size: 0.9rem;
+  color: #666;
+  margin: 0.5rem 0 0 0;
+  font-weight: normal;
+}
+
+.emailForm {
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+  gap: 1.5rem;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  flex: 1;
+}
+
+.emailForm::-webkit-scrollbar {
+  display: none;
+}
+
+.emailField {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.emailField label {
+  font-weight: bold;
+  color: var(--primary);
+  font-size: 0.9rem;
+}
+
+.emailInput,
+.emailTextarea {
+  padding: 0.75rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 4px;
+  font-family: 'XPaider', monospace;
+  font-size: 0.95rem;
+  transition: border-color 0.2s;
+}
+
+.emailInput:focus,
+.emailTextarea:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.emailInput:disabled {
+  background-color: #f5f5f5;
+  color: #999;
+}
+
+.emailTextarea {
+  min-height: 250px;
+  resize: vertical;
+}
+
+.emailActions {
+  display: flex;
+  gap: 1rem;
+  margin-top: auto;
+  padding-top: 1rem;
+  border-top: 1px solid #e0e0e0;
+}
+
+.sendButton {
+  flex: 1;
+  padding: 0.75rem 1.5rem;
+  background-color: var(--primary);
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  font-size: 0.95rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.sendButton:hover {
+  background-color: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.discardButton {
+  padding: 0.75rem 1.5rem;
+  background-color: transparent;
+  color: var(--primary);
+  border: 2px solid var(--primary);
+  border-radius: 4px;
+  font-size: 0.95rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.discardButton:hover {
+  background-color: #f5f5f5;
+}
+
+@media (max-width: 768px) {
+  .emailModal {
+    max-width: 95%;
+  }
+
+  .emailForm {
+    padding: 1.5rem;
+  }
+
+  .emailTextarea {
+    min-height: 200px;
+  }
+}
+
+/* Success Modal Styles */
+.successModal {
+  background-color: #ffffff;
+  padding: 0;
+  max-width: 500px;
+  width: 90%;
+  position: relative;
+  border-radius: 8px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+}
+
+.successContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 2rem;
+  text-align: center;
+  color: #333;
+}
+
+.successIcon {
+  font-size: 4rem;
+  color: #22c55e;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 80px;
+  animation: successPulse 0.5s ease-out;
+}
+
+.successIcon i {
+  font-size: 4rem;
+  color: #22c55e;
+}
+
+@keyframes successPulse {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.successContent h2 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 0 0 0.5rem 0;
+  color: #333;
+}
+
+.successContent p {
+  font-size: 0.95rem;
+  margin: 0 0 1.5rem 0;
+  color: #666;
+}
+
+.successButton {
+  padding: 0.75rem 2rem;
+  background-color: #ffffff;
+  color: var(--primary);
+  border: none;
+  border-radius: 4px;
+  font-size: 0.95rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: 'XPaider', monospace;
+  letter-spacing: 0.05em;
+}
+
+.successButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* GitHub Modal Styles */
+.githubModal {
+  background-color: #0d1117;
+  padding: 0;
+  max-width: 900px;
+  width: 95%;
+  max-height: 85vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  position: relative;
+  border-radius: 8px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  border: 2px solid #30363d;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.githubModal::-webkit-scrollbar {
+  display: none;
+}
+
+.githubProfileContent {
+  color: #c9d1d9;
+}
+
+.githubProfileHeader {
+  border-bottom: 1px solid #30363d;
+  padding: 0 1.5rem;
+}
+
+.githubTabsNav {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.githubTab {
+  padding: 1rem 0;
+  color: #8b949e;
+  border-bottom: 3px solid transparent;
+  cursor: pointer;
+  font-family: 'XPaider', monospace;
+  font-size: 0.95rem;
+  transition: all 0.2s;
+}
+
+.githubTab:hover {
+  color: #c9d1d9;
+}
+
+.githubTab.active {
+  color: #c9d1d9;
+  border-bottom-color: #58a6ff;
+}
+
+.githubProfileLayout {
+  display: grid;
+  grid-template-columns: 250px 1fr;
+  gap: 2rem;
+  padding: 2rem 1.5rem;
+  min-height: 600px;
+}
+
+.githubSidebar {
+  padding-right: 1rem;
+  border-right: 1px solid #30363d;
+}
+
+.githubProfilePic {
+  width: 100%;
+  max-width: 200px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid #30363d;
+  position: relative;
+  margin-bottom: 1rem;
+}
+
+.githubFullName {
+  font-size: 1.5rem;
+  color: #c9d1d9;
+  margin: 1rem 0 0.25rem 0;
+  font-family: 'XPaider', monospace;
+}
+
+.githubUsername {
+  font-size: 1.25rem;
+  color: #8b949e;
+  margin: 0 0 0.75rem 0;
+  font-family: 'XPaider', monospace;
+}
+
+.githubBio {
+  color: #8b949e;
+  font-size: 0.9rem;
+  margin: 0 0 1.5rem 0;
+  line-height: 1.5;
+}
+
+.githubFollows {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin: 1.5rem 0;
+  font-size: 0.9rem;
+  color: #8b949e;
+}
+
+.githubFollows span {
+  display: flex;
+  align-items: center;
+}
+
+.githubFollows strong {
+  color: #c9d1d9;
+  margin-right: 0.25rem;
+}
+
+.githubEmail {
+  color: #8b949e;
+  font-size: 0.85rem;
+  margin: 1.5rem 0 0 0;
+  word-break: break-all;
+}
+
+.githubContent {
+  display: flex;
+  flex-direction: column;
+}
+
+.githubReposList {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.githubRepoItem {
+  padding: 1.5rem;
+  background-color: #161b22;
+  border-radius: 6px;
+  border: 1px solid #30363d;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.githubRepoItem:hover {
+  background-color: #0d1117;
+  border-color: #58a6ff;
+  transform: translateY(-2px);
+}
+
+.repoHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+}
+
+.repoHeader h3 {
+  color: #58a6ff;
+  font-size: 1rem;
+  margin: 0;
+  font-family: 'XPaider', monospace;
+  cursor: pointer;
+}
+
+.repoHeader h3:hover {
+  text-decoration: underline;
+}
+
+.repoBadge {
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  background-color: #30363d;
+  color: #8b949e;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  border: 1px solid #444c56;
+  font-family: 'XPaider', monospace;
+}
+
+.repoDesc {
+  color: #8b949e;
+  font-size: 0.9rem;
+  margin: 0 0 1rem 0;
+  line-height: 1.5;
+}
+
+.repoMeta {
+  display: flex;
+  gap: 1.5rem;
+  font-size: 0.85rem;
+  color: #8b949e;
+}
+
+.repoLang {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.repoTime {
+  display: flex;
+  align-items: center;
+}
+
+@media (max-width: 768px) {
+  .githubProfileLayout {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .githubSidebar {
+    border-right: none;
+    border-bottom: 1px solid #30363d;
+    padding-right: 0;
+    padding-bottom: 1.5rem;
+  }
+
+  .githubTabsNav {
+    gap: 1rem;
+  }
+}
