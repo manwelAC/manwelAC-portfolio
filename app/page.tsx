@@ -38,6 +38,10 @@ export default function Home() {
   const [showPdfModal, setShowPdfModal] = useState(false);
   const [pdfTitle, setPdfTitle] = useState("");
   const [pdfPath, setPdfPath] = useState("");
+  const [showCuisiningModal, setShowCuisiningModal] = useState(false);
+  const [isCuisiningLoading, setIsCuisiningLoading] = useState(false);
+  const [showTikTokModal, setShowTikTokModal] = useState(false);
+  const [isTikTokLoading, setIsTikTokLoading] = useState(false);
 
   useEffect(() => {
     if (projectCount === 11) {
@@ -117,6 +121,14 @@ export default function Home() {
     }, 3000);
   };
 
+  const handleCuisiningClick = () => {
+    setIsCuisiningLoading(true);
+    setTimeout(() => {
+      setIsCuisiningLoading(false);
+      setShowCuisiningModal(true);
+    }, 3000);
+  };
+
   const handleEmailIconClick = () => {
     setIsEmailLoading(true);
     setTimeout(() => {
@@ -140,6 +152,14 @@ export default function Home() {
       setTimeout(() => {
         setShowGithubModal(true);
       }, 0);
+    }, 3000);
+  };
+
+  const handleTikTokClick = () => {
+    setIsTikTokLoading(true);
+    setTimeout(() => {
+      setIsTikTokLoading(false);
+      setShowTikTokModal(true);
     }, 3000);
   };
 
@@ -251,7 +271,7 @@ export default function Home() {
               height={24}
             />
           </a>
-          <a href="#" aria-label="TikTok">
+          <a onClick={handleTikTokClick} className={styles.clickable} aria-label="TikTok">
             <Image
               src="/assets/icon/tiktok.svg"
               alt="TikTok"
@@ -343,7 +363,11 @@ export default function Home() {
               <p className={styles.projectDesc}>Project Description:</p>
               <p>A web-based task management website built to organize your project task and collaborate with other users!</p>
             </div>
-            <div className={`${styles.projectCard} pixel-border`}></div>
+            <div className={`${styles.projectCard} pixel-border`} onClick={handleCuisiningClick}>
+              <h3>Cuisining</h3>
+              <p className={styles.projectDesc}>Project Description:</p>
+              <p>A web based 3d Cooking simulator with modular system inspired by TESDA's Cookery NC-II</p>
+            </div>
             <div className={`${styles.projectCard} pixel-border`}></div>
           </div>
         </div>
@@ -588,6 +612,179 @@ export default function Home() {
         </div>
       )}
 
+      {/* TikTok Loading Screen */}
+      {isTikTokLoading && (
+        <div className={styles.loadingOverlay}>
+          <div className={styles.loadingContainer}>
+            <div className={styles.loadingBar}></div>
+            <p>Loading...</p>
+          </div>
+        </div>
+      )}
+
+      {/* TikTok Modal */}
+      {showTikTokModal && (
+        <div className={styles.modalOverlay} onClick={() => setShowTikTokModal(false)}>
+          <div className={`${styles.tiktokModal} pixel-border`} onClick={(e) => e.stopPropagation()}>
+            <button className={styles.closeButton} onClick={() => setShowTikTokModal(false)}>✕</button>
+            <div className={styles.tiktokProfileContent}>
+              {/* Profile Header Section */}
+              <div className={styles.tiktokProfileHeader}>
+                <div className={styles.tiktokProfilePic}>
+                  <Image
+                    src="/assets/images/profilepic.png"
+                    alt="Manuel TikTok Profile"
+                    width={120}
+                    height={120}
+                    priority
+                  />
+                </div>
+
+                <div className={styles.tiktokProfileInfo}>
+                  <div className={styles.tiktokUsernameSection}>
+                    <h2>@manwel.ac</h2>
+                    <span>manwel</span>
+                  </div>
+
+                  <div className={styles.tiktokActionButtons}>
+                    <a 
+                      href="https://www.tiktok.com/@manwel.ac" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className={styles.tiktokButton}
+                    >
+                      Follow me!
+                    </a>
+                    <button className={styles.tiktokButtonSmall}>⚙️</button>
+                    <button className={styles.tiktokButtonSmall}>📤</button>
+                  </div>
+
+                  <div className={styles.tiktokStats}>
+                    <div className={styles.statItem}>
+                      <p className={styles.statNumber}>193</p>
+                      <p className={styles.statLabel}>Following</p>
+                    </div>
+                    <div className={styles.statItem}>
+                      <p className={styles.statNumber}>6347</p>
+                      <p className={styles.statLabel}>Followers</p>
+                    </div>
+                    <div className={styles.statItem}>
+                      <p className={styles.statNumber}>261.9K</p>
+                      <p className={styles.statLabel}>Likes</p>
+                    </div>
+                  </div>
+
+                  <p className={styles.tiktokBio}>No bio yet.</p>
+                </div>
+              </div>
+
+              {/* Tabs Section */}
+              <div className={styles.tiktokTabs}>
+                <button className={`${styles.tiktokTab} ${styles.tiktokTabActive}`}>
+                  🎬 Videos
+                </button>
+                <button className={styles.tiktokTab}>🔁 Reposts</button>
+                <button className={styles.tiktokTab}>❤️ Favorites</button>
+                <button className={styles.tiktokTab}>👍 Liked</button>
+              </div>
+
+              {/* Video Grid */}
+              <div className={styles.tiktokVideosGrid}>
+                <div className={styles.tiktokVideoCard}>
+                  <div className={styles.tiktokVideoThumb}>
+                    <Image
+                      src="/assets/images/laughingcat.jpg"
+                      alt="TikTok Video 1"
+                      fill
+                      className={styles.gridImage}
+                      priority
+                    />
+                  </div>
+                  <div className={styles.tiktokVideoCount}>
+                    <span>▶️ 303</span>
+                  </div>
+                </div>
+
+                <div className={styles.tiktokVideoCard}>
+                  <div className={styles.tiktokVideoThumb}>
+                    <Image
+                      src="/assets/images/ayo.jpg"
+                      alt="TikTok Video 2"
+                      fill
+                      className={styles.gridImage}
+                      priority
+                    />
+                  </div>
+                  <div className={styles.tiktokVideoCount}>
+                    <span>▶️ 1.8K</span>
+                  </div>
+                </div>
+
+                <div className={styles.tiktokVideoCard}>
+                  <div className={styles.tiktokVideoThumb}>
+                    <Image
+                      src="/assets/images/burnedout.jpg"
+                      alt="TikTok Video 3"
+                      fill
+                      className={styles.gridImage}
+                      priority
+                    />
+                  </div>
+                  <div className={styles.tiktokVideoCount}>
+                    <span>▶️ 261</span>
+                  </div>
+                </div>
+
+                <div className={styles.tiktokVideoCard}>
+                  <div className={styles.tiktokVideoThumb}>
+                    <Image
+                      src="/assets/images/tankbuild.jpg"
+                      alt="TikTok Video 4"
+                      fill
+                      className={styles.gridImage}
+                      priority
+                    />
+                  </div>
+                  <div className={styles.tiktokVideoCount}>
+                    <span>▶️ 518</span>
+                  </div>
+                </div>
+
+                <div className={styles.tiktokVideoCard}>
+                  <div className={styles.tiktokVideoThumb}>
+                    <Image
+                      src="/assets/images/laughingcat.jpg"
+                      alt="TikTok Video 5"
+                      fill
+                      className={styles.gridImage}
+                      priority
+                    />
+                  </div>
+                  <div className={styles.tiktokVideoCount}>
+                    <span>▶️ 290</span>
+                  </div>
+                </div>
+
+                <div className={styles.tiktokVideoCard}>
+                  <div className={styles.tiktokVideoThumb}>
+                    <Image
+                      src="/assets/images/ayo.jpg"
+                      alt="TikTok Video 6"
+                      fill
+                      className={styles.gridImage}
+                      priority
+                    />
+                  </div>
+                  <div className={styles.tiktokVideoCount}>
+                    <span>▶️ 309</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Email Loading Screen (Initial) */}
       {isEmailLoading && (
         <div className={styles.loadingOverlay}>
@@ -610,6 +807,16 @@ export default function Home() {
 
       {/* Imajica Loading Screen */}
       {isImajicaLoading && (
+        <div className={styles.loadingOverlay}>
+          <div className={styles.loadingContainer}>
+            <div className={styles.loadingBar}></div>
+            <p>Loading...</p>
+          </div>
+        </div>
+      )}
+
+      {/* Cuisining Loading Screen */}
+      {isCuisiningLoading && (
         <div className={styles.loadingOverlay}>
           <div className={styles.loadingContainer}>
             <div className={styles.loadingBar}></div>
@@ -798,6 +1005,38 @@ export default function Home() {
           <div className={styles.loadingContainer}>
             <div className={styles.loadingBar}></div>
             <p>Loading...</p>
+          </div>
+        </div>
+      )}
+
+      {/* Cuisining Modal */}
+      {showCuisiningModal && (
+        <div className={styles.modalOverlay} onClick={() => setShowCuisiningModal(false)}>
+          <div className={`${styles.modal} pixel-border`} onClick={(e) => e.stopPropagation()}>
+            <button className={styles.closeButton} onClick={() => setShowCuisiningModal(false)}>✕</button>
+            <div className={styles.projectModalContent}>
+              <div className={styles.projectInfo}>
+                <h2>Cuisining</h2>
+                <div className={styles.tasksList}>
+                  <h3>Project Details:</h3>
+                  <p>A web based 3d Cooking simulator with modular system inspired by TESDA's Cookery NC-II</p>
+                  <h3>My Role:</h3>
+                  <ul>
+                    <li>UI Designer</li>
+                    <li>3D Model Designer</li>
+                  </ul>
+                </div>
+              </div>
+              <div className={styles.projectImage}>
+                <Image
+                  src="/assets/images/laughingcat.jpg"
+                  alt="Project - Cuisining"
+                  width={250}
+                  height={250}
+                  priority
+                />
+              </div>
+            </div>
           </div>
         </div>
       )}
