@@ -366,7 +366,7 @@ export default function Home() {
             <div className={`${styles.projectCard} pixel-border`} onClick={handleCuisiningClick}>
               <h3>Cuisining</h3>
               <p className={styles.projectDesc}>Project Description:</p>
-              <p>A web based 3d Cooking simulator with modular system inspired by TESDA's Cookery NC-II</p>
+              <p>A web based 3d Cooking simulator with modular system inspired by TESDA&apos;s Cookery NC-II</p>
             </div>
             <div className={`${styles.projectCard} pixel-border`}></div>
           </div>
