@@ -669,7 +669,7 @@ export default function Home() {
                     <li onClick={() => handleTaskClick("Implemented a POS style booking")}>Implemented a POS style booking</li>
                     <li onClick={() => handleTaskClick("Product Management")}>Product Management</li>
                     <li onClick={() => handleTaskClick("Service / Package offering Management")}>Service / Package offering Management</li>
-                    <li onClick={() => handleTaskClick("Staff & Doctor's Commission Management")}>Staff & Doctor's Commission Management</li>
+                    <li onClick={() => handleTaskClick("Staff & Doctor's Commission Management")}>Staff &amp; Doctor&apos;s Commission Management</li>
                     <li onClick={() => handleTaskClick("Installment for Bookings")}>Installment for Bookings</li>
                   </ul>
                 </div>
