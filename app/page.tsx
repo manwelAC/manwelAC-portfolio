@@ -647,7 +647,7 @@ export default function Home() {
                     <li onClick={() => handleTaskClick("Implemented a POS style booking")}>Implemented a POS style booking</li>
                     <li onClick={() => handleTaskClick("Product Management")}>Product Management</li>
                     <li onClick={() => handleTaskClick("Service / Package offering Management")}>Service / Package offering Management</li>
-                    <li onClick={() => handleTaskClick("Staff & Doctor's Commission Management")}>Staff & Doctor's Commission Management</li>
+                    <li onClick={() => handleTaskClick("Staff & Doctor&apos;s Commission Management")}>Staff & Doctor&apos;s Commission Management</li>
                     <li onClick={() => handleTaskClick("Installment for Bookings")}>Installment for Bookings</li>
                   </ul>
                 </div>
@@ -758,7 +758,7 @@ export default function Home() {
                 <i className="hn hn-check-circle"></i>
               </div>
               <h2>Email Sent Successfully!</h2>
-              <p>Thank you for reaching out. I'll get back to you soon.</p>
+              <p>Thank you for reaching out. I&apos;ll get back to you soon.</p>
               <button 
                 className={`${styles.successButton} pixel-border`}
                 onClick={() => setShowEmailSuccess(false)}
@@ -800,16 +800,18 @@ export default function Home() {
                 {/* Left Sidebar */}
                 <div className={styles.githubSidebar}>
                   <div className={styles.githubProfilePic}>
-                    <img
+                    <Image
                       src="/assets/images/sakamoto.jpg"
                       alt="Manuel GitHub Profile"
+                      width={200}
+                      height={200}
                       style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                     />
                   </div>
 
                   <h2 className={styles.githubFullName}>Manuel Cuerdo</h2>
                   <p className={styles.githubUsername}>manwelAC</p>
-                  <p className={styles.githubBio}>I just keep learning, that's me</p>
+                  <p className={styles.githubBio}>I just keep learning, that&apos;s me</p>
 
                   <div className={styles.githubFollows}>
                     <span><strong>2</strong> followers</span>
