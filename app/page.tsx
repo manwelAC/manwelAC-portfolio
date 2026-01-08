@@ -9,9 +9,9 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState(false);
   const [showProjectModal, setShowProjectModal] = useState(false);
   const [isProjectLoading, setIsProjectLoading] = useState(false);
-  const [selectedProject, setSelectedProject] = useState(null);
+  const [selectedProject, setSelectedProject] = useState<string | null>(null);
   const [showTaskModal, setShowTaskModal] = useState(false);
-  const [selectedTask, setSelectedTask] = useState(null);
+  const [selectedTask, setSelectedTask] = useState<string | null>(null);
   const [showInstagramModal, setShowInstagramModal] = useState(false);
   const [showAllProjectsModal, setShowAllProjectsModal] = useState(false);
   const [projectCount, setProjectCount] = useState(0);
@@ -60,7 +60,7 @@ export default function Home() {
     { id: 11, name: "Amoure Booking", type: "Booking Management System" },
   ];
 
-  const taskDescriptions = {
+  const taskDescriptions: Record<string, string> = {
     //Shinryo Tasks that I did.
     "Created a custom timekeeping system": "We know how every company has its own set of rules when it comes to attendance and timekeeping. So, I developed a custom timekeeping system that allows for flexible configurations to accommodate different company policies, ensuring accurate tracking of employee hours.",
     "Fixed and improved the leave management system": "Shinryo doesn't allow employee to file leaves if they have pending attendance issues. I enhanced the leave management system to automatically check for any unresolved attendance discrepancies, tracking the leave credits of each employee properly and ensuring compliance with company policies.",
@@ -77,7 +77,7 @@ export default function Home() {
     "Installment for Bookings": "Created a flexible installment payment system that allows customers to pay for bookings in multiple installments, with automated tracking and payment reminders."
   };
 
-  const handleTaskClick = (taskName) => {
+  const handleTaskClick = (taskName: string) => {
     setSelectedTask(taskName);
     setShowTaskModal(true);
   };
@@ -90,7 +90,7 @@ export default function Home() {
     }, 3000);
   };
 
-  const handleProjectClick = (projectName) => {
+  const handleProjectClick = (projectName: string) => {
     setSelectedProject(projectName);
     setIsProjectLoading(true);
     setTimeout(() => {
@@ -137,7 +137,7 @@ export default function Home() {
     }, 3000);
   };
 
-  const handleEmailInputChange = (e) => {
+  const handleEmailInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setEmailForm(prev => ({
       ...prev,
@@ -145,7 +145,7 @@ export default function Home() {
     }));
   };
 
-  const handleEmailSubmit = async (e) => {
+  const handleEmailSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsEmailSending(true);
     try {
@@ -432,7 +432,7 @@ export default function Home() {
             <button className={styles.closeButton} onClick={() => setShowTaskModal(false)}>✕</button>
             <div className={styles.taskModalContent}>
               <h2>{selectedTask}</h2>
-              <p>{taskDescriptions[selectedTask]}</p>
+              <p>{selectedTask && taskDescriptions[selectedTask]}</p>
             </div>
           </div>
         </div>
