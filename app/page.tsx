@@ -3,8 +3,12 @@
 import styles from "./page.module.css";
 import Image from "next/image";
 import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import FloatingProjectsInfo from "@/components/FloatingProjectsInfo";
+import PdfModal from "@/components/PdfModal";
 
 export default function Home() {
+  const router = useRouter();
   const [showModal, setShowModal] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [showProjectModal, setShowProjectModal] = useState(false);
@@ -13,14 +17,15 @@ export default function Home() {
   const [showTaskModal, setShowTaskModal] = useState(false);
   const [selectedTask, setSelectedTask] = useState<string | null>(null);
   const [showInstagramModal, setShowInstagramModal] = useState(false);
-  const [showAllProjectsModal, setShowAllProjectsModal] = useState(false);
+  const [isInstagramLoading, setIsInstagramLoading] = useState(false);
   const [projectCount, setProjectCount] = useState(0);
+  const [isAllProjectsLoading, setIsAllProjectsLoading] = useState(false);
   const [showTaskZModal, setShowTaskZModal] = useState(false);
   const [isTaskZLoading, setIsTaskZLoading] = useState(false);
-  const [isAllProjectsLoading, setIsAllProjectsLoading] = useState(false);
   const [showImajicaModal, setShowImajicaModal] = useState(false);
   const [isImajicaLoading, setIsImajicaLoading] = useState(false);
   const [showEmailModal, setShowEmailModal] = useState(false);
+  const [isEmailLoading, setIsEmailLoading] = useState(false);
   const [emailForm, setEmailForm] = useState({
     email: "",
     subject: "",
@@ -30,6 +35,9 @@ export default function Home() {
   const [showEmailSuccess, setShowEmailSuccess] = useState(false);
   const [showGithubModal, setShowGithubModal] = useState(false);
   const [isGithubLoading, setIsGithubLoading] = useState(false);
+  const [showPdfModal, setShowPdfModal] = useState(false);
+  const [pdfTitle, setPdfTitle] = useState("");
+  const [pdfPath, setPdfPath] = useState("");
 
   useEffect(() => {
     if (projectCount === 11) {
@@ -45,20 +53,6 @@ export default function Home() {
 
     return () => clearInterval(interval);
   }, [projectCount]);
-
-  const allProjects = [
-    { id: 1, name: "Shinryo", type: "HRIS System" },
-    { id: 2, name: "Imajica", type: "ERP System" },
-    { id: 3, name: "Imajica", type: "Modular System" },
-    { id: 4, name: "UltraMRF", type: "Payroll System" },
-    { id: 5, name: "Powerlug", type: "Insurance Management System" },
-    { id: 6, name: "Injap", type: "Membership Website" },
-    { id: 7, name: "Dental Vera", type: "Payroll System" },
-    { id: 8, name: "Maxtel", type: "Payroll System" },
-    { id: 9, name: "Multitop", type: "Inventory Management System" },
-    { id: 10, name: "Iprecision", type: "Payroll System" },
-    { id: 11, name: "Amoure Booking", type: "Booking Management System" },
-  ];
 
   const taskDescriptions: Record<string, string> = {
     //Shinryo Tasks that I did.
@@ -111,7 +105,7 @@ export default function Home() {
     setIsAllProjectsLoading(true);
     setTimeout(() => {
       setIsAllProjectsLoading(false);
-      setShowAllProjectsModal(true);
+      router.push("/projects");
     }, 3000);
   };
 
@@ -124,7 +118,19 @@ export default function Home() {
   };
 
   const handleEmailIconClick = () => {
-    setShowEmailModal(true);
+    setIsEmailLoading(true);
+    setTimeout(() => {
+      setIsEmailLoading(false);
+      setShowEmailModal(true);
+    }, 3000);
+  };
+
+  const handleInstagramClick = () => {
+    setIsInstagramLoading(true);
+    setTimeout(() => {
+      setIsInstagramLoading(false);
+      setShowInstagramModal(true);
+    }, 3000);
   };
 
   const handleGithubClick = () => {
@@ -135,6 +141,12 @@ export default function Home() {
         setShowGithubModal(true);
       }, 0);
     }, 3000);
+  };
+
+  const handleOpenPdf = (title: string, path: string) => {
+    setPdfTitle(title);
+    setPdfPath(path);
+    setShowPdfModal(true);
   };
 
   const handleEmailInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -207,7 +219,7 @@ export default function Home() {
           <p className={styles.statsLabel}>Paid Projects</p>
         </div>
         <div className={`${styles.socialCard} pixel-border`}>
-          <a onClick={() => setShowInstagramModal(true)} className={styles.clickable} aria-label="Instagram">
+          <a onClick={handleInstagramClick} className={styles.clickable} aria-label="Instagram">
             <Image
               src="/assets/icon/instagram.svg"
               alt="Instagram"
@@ -267,6 +279,16 @@ export default function Home() {
             <ul>
               <li>Full Stack Developer at Intracode IT Solutions</li>
             </ul>
+          </div>
+
+          <div className={styles.section}>
+            <h3>Certificate of Employment</h3>
+            <button 
+              className={styles.certificateButton}
+              onClick={() => handleOpenPdf("Certificate of Employment", "/assets/certificates/Certificate of Employment.pdf")}
+            >
+              📄 View Certificate
+            </button>
           </div>
 
           <div className={styles.section}>
@@ -556,22 +578,22 @@ export default function Home() {
         </div>
       )}
 
-      {/* All Projects Modal */}
-      {showAllProjectsModal && (
-        <div className={styles.modalOverlay} onClick={() => setShowAllProjectsModal(false)}>
-          <div className={`${styles.allProjectsModal} pixel-border`} onClick={(e) => e.stopPropagation()}>
-            <button className={styles.closeButton} onClick={() => setShowAllProjectsModal(false)}>✕</button>
-            <div className={styles.allProjectsContent}>
-              <h2>All Projects ({allProjects.length})</h2>
-              <div className={styles.projectsCardGrid}>
-                {allProjects.map((project) => (
-                  <div key={project.id} className={`${styles.projectItemCard} pixel-border`}>
-                    <h3>{project.name}</h3>
-                    <p>{project.type}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
+      {/* Instagram Loading Screen */}
+      {isInstagramLoading && (
+        <div className={styles.loadingOverlay}>
+          <div className={styles.loadingContainer}>
+            <div className={styles.loadingBar}></div>
+            <p>Loading...</p>
+          </div>
+        </div>
+      )}
+
+      {/* Email Loading Screen (Initial) */}
+      {isEmailLoading && (
+        <div className={styles.loadingOverlay}>
+          <div className={styles.loadingContainer}>
+            <div className={styles.loadingBar}></div>
+            <p>Loading...</p>
           </div>
         </div>
       )}
@@ -647,7 +669,7 @@ export default function Home() {
                     <li onClick={() => handleTaskClick("Implemented a POS style booking")}>Implemented a POS style booking</li>
                     <li onClick={() => handleTaskClick("Product Management")}>Product Management</li>
                     <li onClick={() => handleTaskClick("Service / Package offering Management")}>Service / Package offering Management</li>
-                    <li onClick={() => handleTaskClick("Staff & Doctor&apos;s Commission Management")}>Staff & Doctor&apos;s Commission Management</li>
+                    <li onClick={() => handleTaskClick("Staff & Doctor's Commission Management")}>Staff & Doctor's Commission Management</li>
                     <li onClick={() => handleTaskClick("Installment for Bookings")}>Installment for Bookings</li>
                   </ul>
                 </div>
@@ -878,6 +900,17 @@ export default function Home() {
           </div>
         </div>
       )}
+
+      {/* Floating Projects Info Component */}
+      <FloatingProjectsInfo />
+
+      {/* PDF Modal Component */}
+      <PdfModal 
+        isOpen={showPdfModal}
+        title={pdfTitle}
+        pdfPath={pdfPath}
+        onClose={() => setShowPdfModal(false)}
+      />
     </main>
   );
 }
