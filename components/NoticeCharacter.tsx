@@ -5,7 +5,7 @@ export default function NoticeCharacter() {
   return (
     <div className={styles.noticeCharacterContainer}>
       <div className={styles.chatBubble}>
-        <p>Some project descriptions are not done so it's disabled for the meantime</p>
+        <p>Some project descriptions are not done so it&apos;s disabled for the meantime</p>
         <div className={styles.bubbleTail}></div>
       </div>
       <div className={styles.characterImage}>
