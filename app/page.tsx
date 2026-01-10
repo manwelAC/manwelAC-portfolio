@@ -42,6 +42,12 @@ export default function Home() {
   const [isCuisiningLoading, setIsCuisiningLoading] = useState(false);
   const [showTikTokModal, setShowTikTokModal] = useState(false);
   const [isTikTokLoading, setIsTikTokLoading] = useState(false);
+  const [personalProjectsCarouselIndex, setPersonalProjectsCarouselIndex] = useState(0);
+  const [carouselDirection, setCarouselDirection] = useState<'left' | 'right' | null>(null);
+  const [showRamentModal, setShowRamentModal] = useState(false);
+  const [isRamentLoading, setIsRamentLoading] = useState(false);
+  const [showPilotModal, setShowPilotModal] = useState(false);
+  const [isPilotLoading, setIsPilotLoading] = useState(false);
 
   useEffect(() => {
     if (projectCount === 11) {
@@ -129,6 +135,46 @@ export default function Home() {
     }, 3000);
   };
 
+  const handleRamentClick = () => {
+    setIsRamentLoading(true);
+    setTimeout(() => {
+      setIsRamentLoading(false);
+      setShowRamentModal(true);
+    }, 3000);
+  };
+
+  const handlePilotClick = () => {
+    setIsPilotLoading(true);
+    setTimeout(() => {
+      setIsPilotLoading(false);
+      setShowPilotModal(true);
+    }, 3000);
+  };
+
+  // Personal Projects Data - Defined after handlers to avoid reference errors
+  const personalProjects = [
+    {
+      title: "TaskZ",
+      description: "A web-based task management website built to organize your project task and collaborate with other users!",
+      onClick: handleTaskZClick,
+    },
+    {
+      title: "Cuisining",
+      description: "A web based 3d Cooking simulator with modular system inspired by TESDA's Cookery NC-II",
+      onClick: handleCuisiningClick,
+    },
+    {
+      title: "Rament System",
+      description: "A webforms application POS specifically made for Ramen Restaurants.",
+      onClick: handleRamentClick,
+    },
+    {
+      title: "Pilot Management",
+      description: "A web based Pilot Management website made for people who grind accounts in the gaming community",
+      onClick: handlePilotClick,
+    },
+  ];
+
   const handleEmailIconClick = () => {
     setIsEmailLoading(true);
     setTimeout(() => {
@@ -167,6 +213,26 @@ export default function Home() {
     setPdfTitle(title);
     setPdfPath(path);
     setShowPdfModal(true);
+  };
+
+  const handlePrevPersonalProject = () => {
+    setCarouselDirection('left');
+    setTimeout(() => {
+      setPersonalProjectsCarouselIndex((prev) => 
+        prev === 0 ? personalProjects.length - 1 : prev - 1
+      );
+      setCarouselDirection(null);
+    }, 400);
+  };
+
+  const handleNextPersonalProject = () => {
+    setCarouselDirection('right');
+    setTimeout(() => {
+      setPersonalProjectsCarouselIndex((prev) => 
+        prev === personalProjects.length - 1 ? 0 : prev + 1
+      );
+      setCarouselDirection(null);
+    }, 400);
   };
 
   const handleEmailInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -239,6 +305,7 @@ export default function Home() {
           <p className={styles.statsLabel}>Paid Projects</p>
         </div>
         <div className={`${styles.socialCard} pixel-border`}>
+          <h2>Socials</h2>
           <a onClick={handleInstagramClick} className={styles.clickable} aria-label="Instagram">
             <Image
               src="/assets/icon/instagram.svg"
@@ -357,18 +424,59 @@ export default function Home() {
           </div>
 
           <h2>Personal / School Projects</h2>
-          <div className={styles.projectsGrid}>
-            <div className={`${styles.projectCard} pixel-border`} onClick={handleTaskZClick}>
-              <h3>TaskZ</h3>
-              <p className={styles.projectDesc}>Project Description:</p>
-              <p>A web-based task management website built to organize your project task and collaborate with other users!</p>
+          <div className={styles.carouselContainer}>
+            <div className={styles.carouselTrack}>
+              {[
+                personalProjects[(personalProjectsCarouselIndex - 1 + personalProjects.length) % personalProjects.length],
+                personalProjects[personalProjectsCarouselIndex],
+                personalProjects[(personalProjectsCarouselIndex + 1) % personalProjects.length],
+              ].map((project, displayIndex) => {
+                const isActive = displayIndex === 1;
+                let animationClass = '';
+                if (carouselDirection) {
+                  animationClass = carouselDirection === 'right' 
+                    ? styles.carouselSlideAnimatingRight 
+                    : styles.carouselSlideAnimatingLeft;
+                }
+                
+                const handleCardClick = () => {
+                  if (isActive) {
+                    project.onClick();
+                  } else if (displayIndex === 0) {
+                    handlePrevPersonalProject();
+                  } else if (displayIndex === 2) {
+                    handleNextPersonalProject();
+                  }
+                };
+                
+                return (
+                  <div
+                    key={displayIndex}
+                    className={`${styles.carouselSlide} ${isActive ? styles.carouselSlideActive : ''} ${animationClass}`}
+                    onClick={handleCardClick}
+                  >
+                    <div className={`${styles.carouselCard} pixel-border`}>
+                      <h3>{project.title}</h3>
+                      <p className={styles.projectDesc}>Project Description:</p>
+                      <p>{project.description}</p>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
-            <div className={`${styles.projectCard} pixel-border`} onClick={handleCuisiningClick}>
-              <h3>Cuisining</h3>
-              <p className={styles.projectDesc}>Project Description:</p>
-              <p>A web based 3d Cooking simulator with modular system inspired by TESDA&apos;s Cookery NC-II</p>
+            <div className={styles.carouselButtonsContainer}>
+              <button className={styles.carouselButton} onClick={handlePrevPersonalProject}>←</button>
+              <button className={styles.carouselButton} onClick={handleNextPersonalProject}>→</button>
             </div>
-            <div className={`${styles.projectCard} pixel-border`}></div>
+            <div className={styles.carouselDots}>
+              {personalProjects.map((_, index) => (
+                <div
+                  key={index}
+                  className={`${styles.dot} ${index === personalProjectsCarouselIndex ? styles.dotActive : ''}`}
+                  onClick={() => setPersonalProjectsCarouselIndex(index)}
+                />
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -393,23 +501,23 @@ export default function Home() {
                 <h2>More About Me</h2>
                 <div className={styles.infoItem}>
                   <label>Lives in:</label>
-                  <p></p>
+                  <p>Caloocan City</p>
                 </div>
                 <div className={styles.infoItem}>
                   <label>Birthdate:</label>
-                  <p></p>
+                  <p> June 13, 2004</p>
                 </div>
                 <div className={styles.infoItem}>
                   <label>Province:</label>
-                  <p></p>
+                  <p>Infanta, Quezon</p>
                 </div>
                 <div className={styles.infoItem}>
                   <label>Goal:</label>
-                  <p></p>
+                  <p>To become a successful software engineer</p>
                 </div>
                 <div className={styles.infoItem}>
                   <label>My motto:</label>
-                  <p></p>
+                  <p>Humility, in everything you do.</p>
                 </div>
               </div>
               <div className={styles.modalImage}>
@@ -1031,6 +1139,126 @@ export default function Home() {
                 <Image
                   src="/assets/images/laughingcat.jpg"
                   alt="Project - Cuisining"
+                  width={250}
+                  height={250}
+                  priority
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Cuisining Modal */}
+      {showCuisiningModal && (
+        <div className={styles.modalOverlay} onClick={() => setShowCuisiningModal(false)}>
+          <div className={`${styles.modal} pixel-border`} onClick={(e) => e.stopPropagation()}>
+            <button className={styles.closeButton} onClick={() => setShowCuisiningModal(false)}>✕</button>
+            <div className={styles.projectModalContent}>
+              <div className={styles.projectInfo}>
+                <h2>Cuisining</h2>
+                <div className={styles.tasksList}>
+                  <h3>Project Details:</h3>
+                  <p>A web based 3d Cooking simulator with modular system inspired by TESDA&apos;s Cookery NC-II</p>
+                  <h3>My Role:</h3>
+                  <ul>
+                    <li>UI Designer</li>
+                    <li>3D Model Designer</li>
+                  </ul>
+                </div>
+              </div>
+              <div className={styles.projectImage}>
+                <Image
+                  src="/assets/images/laughingcat.jpg"
+                  alt="Project - Cuisining"
+                  width={250}
+                  height={250}
+                  priority
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Rament System Loading Screen */}
+      {isRamentLoading && (
+        <div className={styles.loadingOverlay}>
+          <div className={styles.loadingContainer}>
+            <div className={styles.loadingBar}></div>
+            <p>Loading...</p>
+          </div>
+        </div>
+      )}
+
+      {/* Rament System Modal */}
+      {showRamentModal && (
+        <div className={styles.modalOverlay} onClick={() => setShowRamentModal(false)}>
+          <div className={`${styles.modal} pixel-border`} onClick={(e) => e.stopPropagation()}>
+            <button className={styles.closeButton} onClick={() => setShowRamentModal(false)}>✕</button>
+            <div className={styles.projectModalContent}>
+              <div className={styles.projectInfo}>
+                <h2>Rament System</h2>
+                <div className={styles.tasksList}>
+                  <h3>Project Details:</h3>
+                  <p>A webforms application POS specifically made for Ramen Restaurants.</p>
+                  <h3>Key Features:</h3>
+                  <ul>
+                    <li>Point of Sale Management</li>
+                    <li>Menu & Inventory Management</li>
+                    <li>Order Processing</li>
+                    <li>Sales Reporting</li>
+                  </ul>
+                </div>
+              </div>
+              <div className={styles.projectImage}>
+                <Image
+                  src="/assets/images/tankbuild.jpg"
+                  alt="Project - Rament System"
+                  width={250}
+                  height={250}
+                  priority
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Pilot Management Loading Screen */}
+      {isPilotLoading && (
+        <div className={styles.loadingOverlay}>
+          <div className={styles.loadingContainer}>
+            <div className={styles.loadingBar}></div>
+            <p>Loading...</p>
+          </div>
+        </div>
+      )}
+
+      {/* Pilot Management Modal */}
+      {showPilotModal && (
+        <div className={styles.modalOverlay} onClick={() => setShowPilotModal(false)}>
+          <div className={`${styles.modal} pixel-border`} onClick={(e) => e.stopPropagation()}>
+            <button className={styles.closeButton} onClick={() => setShowPilotModal(false)}>✕</button>
+            <div className={styles.projectModalContent}>
+              <div className={styles.projectInfo}>
+                <h2>Pilot Management</h2>
+                <div className={styles.tasksList}>
+                  <h3>Project Details:</h3>
+                  <p>A web based Pilot Management website made for people who grind accounts in the gaming community</p>
+                  <h3>Key Features:</h3>
+                  <ul>
+                    <li>Account Management</li>
+                    <li>Progress Tracking</li>
+                    <li>Community Collaboration</li>
+                    <li>Achievement Logging</li>
+                  </ul>
+                </div>
+              </div>
+              <div className={styles.projectImage}>
+                <Image
+                  src="/assets/images/ayo.jpg"
+                  alt="Project - Pilot Management"
                   width={250}
                   height={250}
                   priority
